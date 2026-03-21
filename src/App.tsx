@@ -14,19 +14,25 @@ import { motion } from 'motion/react';
 
 const CHECKOUT_URL = "https://pay.cakto.com.br/y8mkzes_790947";
 
-const FeatureCard = ({ icon: Icon, title, description, items }: { icon: any, title: string, description: string, items: string[] }) => (
+const SISTEMAS = {
+  estoque:    { label: 'Estoque',    url: 'https://estoque.r2b.ia.br/',    color: 'text-emerald-600' },
+  financeiro: { label: 'Financeiro', url: 'https://financeiro.r2b.ia.br/', color: 'text-indigo-600'  },
+  pdv:        { label: 'PDV',        url: 'https://pdv.r2b.ia.br/',        color: 'text-amber-600'   },
+};
+
+const FeatureCard = ({ icon: Icon, title, description, items, link, accentColor = 'bg-indigo-50 text-indigo-600', btnColor = 'bg-indigo-600 hover:bg-indigo-700', cardBg = 'bg-white', cardBorder = 'border-slate-100' }: { icon: any, title: string, description: string, items: string[], link?: string, accentColor?: string, btnColor?: string, cardBg?: string, cardBorder?: string }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+    className={`${cardBg} p-8 rounded-2xl shadow-sm border ${cardBorder} hover:shadow-md transition-shadow`}
   >
-    <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-6 text-indigo-600">
+    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${accentColor}`}>
       <Icon size={24} />
     </div>
     <h3 className="text-xl font-bold mb-3">{title}</h3>
     <p className="text-slate-600 mb-6 leading-relaxed">{description}</p>
-    <ul className="space-y-3">
+    <ul className="space-y-3 mb-8">
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3 text-sm text-slate-600">
           <CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-0.5" />
@@ -34,6 +40,16 @@ const FeatureCard = ({ icon: Icon, title, description, items }: { icon: any, tit
         </li>
       ))}
     </ul>
+    {link && (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white transition-all ${btnColor}`}
+      >
+        Acessar Sistema <ArrowRight size={16} />
+      </a>
+    )}
   </motion.div>
 );
 
@@ -51,6 +67,10 @@ export default function App() {
             <a href="#sistemas" className="hover:text-indigo-600 transition-colors">Sistemas</a>
             <a href="#integracao" className="hover:text-indigo-600 transition-colors">Integração</a>
             <a href="#precos" className="hover:text-indigo-600 transition-colors">Preços</a>
+            <span className="text-slate-200">|</span>
+            <a href={SISTEMAS.estoque.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors">Estoque</a>
+            <a href={SISTEMAS.financeiro.url} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">Financeiro</a>
+            <a href={SISTEMAS.pdv.url} target="_blank" rel="noopener noreferrer" className="hover:text-amber-600 transition-colors">PDV</a>
           </nav>
           <a 
             href={CHECKOUT_URL}
@@ -158,6 +178,11 @@ export default function App() {
                 "Relatórios de inventário",
                 "Entrada via XML de NF-e"
               ]}
+              link={SISTEMAS.estoque.url}
+              accentColor="bg-blue-100 text-blue-600"
+              btnColor="bg-blue-600 hover:bg-blue-700"
+              cardBg="bg-blue-50"
+              cardBorder="border-blue-100"
             />
             <FeatureCard 
               icon={DollarSign}
@@ -170,6 +195,11 @@ export default function App() {
                 "DRE Gerencial automático",
                 "Emissão de boletos e notas"
               ]}
+              link={SISTEMAS.financeiro.url}
+              accentColor="bg-emerald-100 text-emerald-600"
+              btnColor="bg-emerald-600 hover:bg-emerald-700"
+              cardBg="bg-emerald-50"
+              cardBorder="border-emerald-100"
             />
             <FeatureCard 
               icon={ShoppingCart}
@@ -182,6 +212,11 @@ export default function App() {
                 "Fechamento de caixa cego",
                 "Funciona offline e online"
               ]}
+              link={SISTEMAS.pdv.url}
+              accentColor="bg-orange-100 text-orange-500"
+              btnColor="bg-orange-500 hover:bg-orange-600"
+              cardBg="bg-orange-50"
+              cardBorder="border-orange-100"
             />
           </div>
         </div>
