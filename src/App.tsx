@@ -13,6 +13,14 @@ import {
 import { motion } from 'motion/react';
 
 const CHECKOUT_URL = "https://pay.cakto.com.br/y8mkzes_790947";
+const WHATSAPP_URL = "https://wa.me/5547996361402";
+
+const WhatsAppIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.492a.5.5 0 0 0 .613.608l5.757-1.505A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.002-1.367l-.358-.213-3.714.971.993-3.618-.234-.373A9.818 9.818 0 1 1 12 21.818z"/>
+  </svg>
+);
 
 const SISTEMAS = {
   estoque:    { label: 'Estoque',    url: 'https://estoque.r2b.ia.br/',    color: 'text-emerald-600' },
@@ -123,11 +131,25 @@ export default function App() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="mt-20 relative"
           >
-            <div className="bg-slate-900 rounded-3xl p-4 shadow-2xl overflow-hidden aspect-video max-w-5xl mx-auto border-4 border-slate-800">
-              <div className="w-full h-full bg-slate-800 rounded-2xl flex items-center justify-center text-slate-500 flex-col gap-4">
-                <BarChart3 size={64} className="opacity-20" />
-                <p className="font-mono text-sm uppercase tracking-widest opacity-40">Interface Unificada R2B</p>
-              </div>
+            <div className="bg-slate-900 rounded-3xl p-2 shadow-2xl overflow-hidden aspect-video max-w-5xl mx-auto border-4 border-slate-800">
+              <iframe
+                className="w-full h-full rounded-2xl"
+                src="https://www.youtube.com/embed/hg2nZNz_1Sg"
+                title="R2B - Apresentação"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            {/* WhatsApp CTA below video */}
+            <div className="mt-8 flex justify-center">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200"
+              >
+                <WhatsAppIcon /> Ficou com dúvidas? Fale comigo no WhatsApp!
+              </a>
             </div>
             {/* Floating Badges */}
             <div className="absolute -top-6 -left-6 md:left-12 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden sm:block">
@@ -337,6 +359,14 @@ export default function App() {
             >
               Assinar Agora
             </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center justify-center gap-2 w-full bg-emerald-500 text-white py-4 rounded-2xl text-base font-bold hover:bg-emerald-600 transition-all"
+            >
+              <WhatsAppIcon /> Tirar dúvidas pelo WhatsApp
+            </a>
             <p className="mt-6 text-sm text-slate-500">Cancelamento fácil a qualquer momento.</p>
           </div>
         </div>
@@ -349,12 +379,22 @@ export default function App() {
           <p className="text-slate-400 text-xl mb-12 max-w-2xl mx-auto">
             Junte-se a centenas de empresas que já utilizam o ecossistema R2B para crescer com organização.
           </p>
-          <a 
-            href={CHECKOUT_URL}
-            className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition-all"
-          >
-            Começar Agora <ArrowRight size={24} />
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a 
+              href={CHECKOUT_URL}
+              className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition-all"
+            >
+              Começar Agora <ArrowRight size={24} />
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-emerald-500 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-emerald-600 transition-all"
+            >
+              <WhatsAppIcon /> Falar no WhatsApp
+            </a>
+          </div>
         </div>
       </section>
 
@@ -375,6 +415,19 @@ export default function App() {
           </div>
         </div>
       </footer>
+      {/* Floating WhatsApp Button */}
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-emerald-500 text-white px-4 py-3 rounded-full shadow-2xl hover:bg-emerald-600 transition-all group"
+        aria-label="Falar no WhatsApp"
+      >
+        <WhatsAppIcon />
+        <span className="text-sm font-bold max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
+          Falar comigo
+        </span>
+      </a>
     </div>
   );
 }
